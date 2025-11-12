@@ -5,152 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Combinador de Sumandos</title>
   <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f8f9fa;
-      color: #222;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* ===== Barra superior sticky ===== */
-    .navbar {
-      position: sticky;
-      top: 0;
-      background: #2c2c2c;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      padding: 6px 0;
-      z-index: 1000;
-      transition: background 0.4s ease, box-shadow 0.4s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-    }
-
-    .navbar.scrolled {
-      background: rgba(60, 60, 60, 0.9);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
-    }
-
-    .navbar a {
-      color: #f8f8f8;
-      background: rgba(255, 255, 255, 0.08);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .navbar a:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.05);
-    }
-
-    header {
-      background: linear-gradient(270deg, #0078d7, #00a3ff, #0078d7);
-      background-size: 600% 600%;
-      animation: gradientShift 8s ease infinite;
-      color: white;
-      text-align: center;
-      padding: 0.9em 1em;
-    }
-    header h1 {
-      font-size: 1.7em;
-      margin-bottom: 0.2em;
-    }
-    header p {
-      margin-top: 0;
-      font-size: 0.95em;
-      opacity: 0.9;
-    }
-
-    main {
-      max-width: 880px;
-      margin: 2em auto;
-      background: white;
-      padding: 1.8em;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    h2 {
-      color: #0078d7;
-      margin-top: 1.4em;
-    }
-
-    code {
-      background: #eee;
-      padding: 2px 5px;
-      border-radius: 4px;
-      font-family: Consolas, monospace;
-    }
-
-    pre {
-      background: #f0f0f0;
-      padding: 10px;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-
-    #output {
-      background: #f4f4f4;
-      border-radius: 8px;
-      padding: 1em;
-      margin-top: 1em;
-      white-space: pre-wrap;
-      font-family: Consolas, monospace;
-      color: #111;
-    }
-
-    button {
-      background: #0078d7;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #005fa3;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 1.1em;
-      font-size: 0.9em;
-      color: #555;
-      background-color: #f1f1f1;
-    }
-
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .navbar {
-        flex-direction: column;
-        gap: 8px;
-        padding: 8px;
-      }
-    }
+    body{font-family:"Segoe UI",Arial,sans-serif;background:#f8f9fa;color:#222;margin:0}
+    .navbar{position:sticky;top:0;background:#2c2c2c;display:flex;justify-content:center;gap:15px;padding:6px 0;z-index:1000;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+    .navbar a{color:#f8f8f8;background:rgba(255,255,255,.08);text-decoration:none;padding:6px 14px;border-radius:8px;font-weight:bold;transition:.3s}
+    .navbar a:hover{background:rgba(255,255,255,.25);transform:scale(1.05)}
+    header{background:linear-gradient(270deg,#0078d7,#00a3ff,#0078d7);background-size:600% 600%;animation:gradientShift 8s ease infinite;color:white;text-align:center;padding:.8em 1em}
+    header h1{font-size:1.6em;margin-bottom:.2em}header p{margin-top:0;font-size:.95em;opacity:.9}
+    main{max-width:880px;margin:2em auto;background:white;padding:1.8em;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+    #summaryBox,#detailsBox{background:#eef6ff;border-left:4px solid #0078d7;padding:12px 15px;border-radius:8px;margin-top:15px;font-family:"Segoe UI",sans-serif}
+    #summaryBox strong{color:#004a99}
+    #summaryIcon{font-size:1.4em;margin-right:8px;vertical-align:middle}
+    #statusMessage{font-weight:bold;margin-top:10px;text-align:center;animation:fadeBlink 1.2s infinite;display:flex;align-items:center;justify-content:center;gap:8px}
+    @keyframes fadeBlink{0%,100%{opacity:1}50%{opacity:.3}}
+    .spinner{border:4px solid #cfe2ff;border-top:4px solid #0078d7;border-radius:50%;width:20px;height:20px;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle}
+    @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    #output{background:#f4f4f4;border-radius:8px;padding:1em;margin-top:1em;white-space:pre-wrap;font-family:Consolas,monospace;color:#111}
+    button{background:#0078d7;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-weight:bold;transition:background .3s}
+    button:hover{background:#005fa3}
+    .download-animated{animation:glow 1.2s ease-in-out infinite alternate}
+    @keyframes glow{0%{box-shadow:0 0 6px #0078d7}100%{box-shadow:0 0 18px #00a3ff}}
+    footer{text-align:center;margin-top:40px;padding:1.1em;font-size:.9em;color:#555;background-color:#f1f1f1}
+    @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
   </style>
 </head>
 <body>
-  <nav class="navbar" id="navbar">
+  <nav class="navbar">
     <a href="combinador_sumandos.py" download>⬇️ Descargar código Python</a>
     <a href="README.md" download>📘 Descargar README</a>
     <a href="README.md" target="_blank">👁️ Ver README</a>
@@ -163,17 +42,39 @@
 
   <main>
     <h2>⚙️ Ejecutar Combinaciones</h2>
-    <p>Sube tu archivo <code>sumandos.txt</code>, indica el valor objetivo y el margen de error.</p>
-
+    <p>Sube tu archivo <code>sumandos.txt</code>, indica el valor objetivo y el margen de error o dispersión en más o en menos.</p>
     <input type="file" id="fileInput" accept=".txt" /><br><br>
     <label for="objetivo">Objetivo: </label>
     <input type="number" id="objetivo" step="0.01" />  
     <label for="margen">Margen (ej. 0.02): </label>
-    <input type="number" id="margen" step="0.01" value="0.01" />
+    <input type="number" id="margen" step="0.01" value="0.00" />
     <br><br>
     <button id="runButton">🔍 Calcular combinaciones</button>
 
+    <div id="summaryBox" style="display:none;">
+      <span id="summaryIcon"></span><strong>Resumen:</strong><br>
+      🕒 <span id="summaryTime"></span><br>
+      🔢 <span id="summaryComb"></span><br>
+      📄 <span id="summarySumandos"></span><br>
+      💰 <span id="summaryMargin"></span>
+      <div id="statusMessage"></div>
+    </div>
+
+    <div id="detailsBox" style="display:none;">
+      <strong>📄 Detalles del cálculo</strong><br>
+      🕒 Inicio: <span id="detalleInicio"></span><br>
+      🕕 Fin: <span id="detalleFin"></span><br>
+      🎯 Objetivo: <span id="detalleObjetivo"></span><br>
+      💰 Margen de error o dispersión en más o en menos: <span id="detalleMargen"></span><br>
+      📈 Rango válido: <span id="detalleRango"></span><br>
+      ⚙️ Condición aplicada: <span id="detalleCondicion"></span><br>
+      ⏱️ Tiempo total: <span id="detalleTiempo"></span>
+    </div>
+
     <div id="output">Esperando datos...</div>
+    <div id="downloadContainer" style="display:none; text-align:center; margin-top:20px;">
+      <button id="downloadButton" class="download-animated">💾 Descargar resultados</button>
+    </div>
   </main>
 
   <footer>
@@ -181,15 +82,10 @@
     © 2025 — Código realizado por Vincenzo Natale · vnatale52@gmail.com
   </footer>
 
-  <!-- Pyodide -->
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
   <script>
-    const navbar = document.getElementById("navbar");
-    window.addEventListener("scroll", () => {
-      navbar.classList.toggle("scrolled", window.scrollY > 30);
-    });
+    let pyodide, resultText = "", counterInterval;
 
-    let pyodide;
     async function loadPyodideAndPackages() {
       pyodide = await loadPyodide();
       document.getElementById("output").textContent = "✅ Pyodide cargado correctamente. Esperando archivo...";
@@ -199,39 +95,132 @@
     document.getElementById("runButton").addEventListener("click", async () => {
       const fileInput = document.getElementById("fileInput");
       const objetivo = parseFloat(document.getElementById("objetivo").value);
-      const margen = parseFloat(document.getElementById("margen").value);
+      const margenOriginal = parseFloat(document.getElementById("margen").value);
       const output = document.getElementById("output");
+      const summaryBox = document.getElementById("summaryBox");
+      const detailsBox = document.getElementById("detailsBox");
+      const status = document.getElementById("statusMessage");
+      const downloadContainer = document.getElementById("downloadContainer");
+
+      downloadContainer.style.display = "none";
 
       if (!fileInput.files[0]) {
         output.textContent = "⚠️ Por favor selecciona un archivo sumandos.txt.";
         return;
       }
+
+      const inicio = new Date();
+      const startTime = performance.now();
       const text = await fileInput.files[0].text();
       const lines = text.split(/[\r\n]+/).map(l => l.trim()).filter(l => l !== "");
       const sumandos = lines.map(v => parseFloat(v.replace(",", ".")));
 
+      // Duplicados
+      const duplicados = {};
+      lines.forEach(v => { duplicados[v] = (duplicados[v] || 0) + 1; });
+      const duplicadosEncontrados = Object.entries(duplicados).filter(([k, v]) => v > 1);
+
+      const margen = Math.abs(margenOriginal);
+      const rangoMin = (objetivo - margen).toLocaleString("es-AR", {minimumFractionDigits:2});
+      const rangoMax = (objetivo + margen).toLocaleString("es-AR", {minimumFractionDigits:2});
+      const condicion = margen === 0 ? "suma_total == objetivo" : "objetivo - margen ≤ suma_total ≤ objetivo + margen";
+
+      clearInterval(counterInterval);
+      let count = 0;
+      status.innerHTML = `<div class="spinner"></div> 🔄 Buscando combinaciones... 0`;
+      status.style.color = "#0078d7";
+      summaryBox.style.display = "block";
+      detailsBox.style.display = "block";
+      counterInterval = setInterval(() => {
+        count++;
+        status.innerHTML = `<div class="spinner"></div> 🔄 Buscando combinaciones... ${count}`;
+      }, 500);
+
       const code = `
-sumandos = ${JSON.stringify(sumandos)}
-objetivo = ${objetivo}
-margen = ${margen}
-soluciones = []
 from itertools import combinations
-for r in range(1, len(sumandos)+1):
-  for combo in combinations(sumandos, r):
-    if abs(sum(combo) - objetivo) <= margen:
+sumandos=${JSON.stringify(sumandos)}
+objetivo=${objetivo}
+margen=${margen}
+soluciones=[]
+for r in range(1,len(sumandos)+1):
+  for combo in combinations(sumandos,r):
+    if abs(sum(combo)-objetivo)<=margen:
       soluciones.append(combo)
+output=""
 if soluciones:
-  for i, s in enumerate(soluciones, 1):
-    print(f"Solución {i}: {', '.join(f'{x:.2f}' for x in s)} => Total: {sum(s):.2f}")
+  for i,s in enumerate(soluciones,1):
+    exacta = " [EXACTA]" if abs(sum(s)-objetivo)<1e-9 else ""
+    output+=f"--- Solución {i}{exacta} ---\\nCombinación:\\n"+"\\n".join([f"  {x:.2f}" for x in s])+f"\\nSuma total: {sum(s):.2f}\\n\\n"
 else:
-  print("❌ No se encontraron combinaciones dentro del margen especificado.")
-`;
+  output="❌ No se encontraron combinaciones dentro del margen especificado.\\n"
+output`;
       output.textContent = "⏳ Calculando...";
-      await pyodide.runPythonAsync(code);
-      const result = pyodide.runPython("''.join([''])");
-      output.textContent = pyodide.runPython("''"); // limpia buffer
       const logs = await pyodide.runPythonAsync(code);
-      output.textContent = logs ? logs : "✅ Cálculo completado.";
+      clearInterval(counterInterval);
+
+      const fin = new Date();
+      const elapsed = ((performance.now() - startTime) / 1000).toFixed(3);
+      const numComb = (logs.match(/Solución/g) || []).length;
+
+      const icon = document.getElementById("summaryIcon");
+      if (numComb > 0) {
+        icon.textContent = "✔️"; icon.style.color = "green"; status.style.color = "green";
+        status.innerHTML = `✅ Se encontraron ${numComb} combinaciones.`;
+      } else {
+        icon.textContent = "❌"; icon.style.color = "red"; status.style.color = "red";
+        status.innerHTML = `❌ No se encontraron combinaciones.`;
+      }
+
+      // Texto duplicados
+      let textoDuplicados = "";
+      if (duplicadosEncontrados.length > 0) {
+        textoDuplicados = "Atención: Se detectaron valores duplicados en el archivo:\n";
+        duplicadosEncontrados.forEach(([valor, veces]) => { textoDuplicados += `   - ${valor} aparece ${veces} veces\n`; });
+        textoDuplicados += "   Estos duplicados pueden generar combinaciones equivalentes.\n";
+      } else {
+        textoDuplicados = "✅ No se detectaron combinaciones equivalentes generadas por duplicados.\n";
+      }
+
+      const fmt = n => n.toLocaleString("es-AR", {minimumFractionDigits:2});
+      resultText = `
+------------------------------------------------------------
+🔢 COMBINADOR DE SUMANDOS — Versión Web (Pyodide)
+------------------------------------------------------------
+📄 Detalles del cálculo
+🕒 Inicio: ${inicio.toLocaleString()}
+🕕 Fin: ${fin.toLocaleString()}
+🎯 Objetivo: ${fmt(objetivo)}
+💰 Margen de error o dispersión en más o en menos: ±${fmt(margen)} pesos
+📈 Rango válido: desde ${rangoMin} hasta ${rangoMax}
+⚙️ Condición aplicada: ${condicion}
+🕒 Tiempo total: ${elapsed} segundos
+
+${textoDuplicados}
+
+--- Sumandos cargados ---
+${lines.join("\n")}
+
+--- Soluciones encontradas ---
+${logs.replace(/\./g, ",")}
+
+⚙️ Código ejecutado mediante Pyodide (versión web)
+Código original: combinador_sumandos.py
+Autor: Vincenzo Natale — vnatale52@gmail.com
+© 2025 — Todos los derechos reservados.
+------------------------------------------------------------
+`;
+      output.textContent = resultText;
+      downloadContainer.style.display = "block";
+    });
+
+    document.getElementById("downloadButton").addEventListener("click", () => {
+      if (!resultText) { alert("⚠️ Primero ejecuta el cálculo antes de descargar los resultados."); return; }
+      const blob = new Blob([resultText], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "soluciones_sumandos.txt";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     });
   </script>
 </body>
