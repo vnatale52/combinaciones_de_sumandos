@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Combinador de Sumandos - Google OR-Tools</title>
+  <title>Combinador de Sumandos</title>
   <style>
+    /* ===== Estilos base ===== */
     body {
       font-family: "Segoe UI", Arial, sans-serif;
       background-color: #f8f9fa;
@@ -12,34 +13,56 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
+      animation: fadeIn 1.2s ease-in;
     }
     header {
-      background-color: #0078d7;
+      background: linear-gradient(270deg, #0078d7, #00a3ff, #0078d7);
+      background-size: 600% 600%;
+      animation: gradientShift 8s ease infinite;
       color: white;
       text-align: center;
-      padding: 1.5em 1em;
+      padding: 2.5em 1em;
     }
     main {
-      max-width: 900px;
+      max-width: 960px;
       margin: 2em auto;
       background: white;
-      padding: 2em;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 2.5em;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 1.6s ease-in;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #0078d7;
     }
     code {
       background: #eee;
       padding: 2px 5px;
       border-radius: 4px;
+      font-family: Consolas, monospace;
     }
     pre {
       background: #f0f0f0;
       padding: 10px;
       border-radius: 6px;
       overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #0078d7;
+      color: white;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+      padding: 8px;
     }
     a.button {
       display: inline-block;
@@ -49,65 +72,129 @@
       text-decoration: none;
       border-radius: 6px;
       margin-top: 10px;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
     a.button:hover {
       background: #005fa3;
+      transform: scale(1.05);
     }
     footer {
       text-align: center;
       margin-top: 40px;
-      padding: 1em;
+      padding: 1.5em;
       font-size: 0.9em;
       color: #555;
+      background-color: #f1f1f1;
+    }
+    .highlight {
+      background: #e8f4ff;
+      border-left: 4px solid #0078d7;
+      padding: 10px 15px;
+      margin: 1em 0;
+      border-radius: 6px;
+    }
+
+    /* ===== Animaciones ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>🔢 Combinador de Sumandos</h1>
-    <p>Basado en Google OR-Tools (Argentina)</p>
+    <p>Basado en Google OR-Tools — Formato Regional Argentina</p>
   </header>
 
   <main>
-    <h2>Descripción</h2>
+    <h2>📘 Descripción General</h2>
     <p>
-      Este proyecto utiliza la librería <strong>Google OR-Tools</strong> para encontrar todas las combinaciones
-      posibles de sumandos que alcanzan un objetivo dado, considerando un margen de error configurable.
-      Está diseñado para el formato numérico argentino, utilizando coma (<code>,</code>) como separador decimal.
+      Este programa utiliza la librería <strong>Google OR-Tools</strong> (módulo <code>cp_model</code>)
+      para encontrar todas las combinaciones posibles de sumandos que sumen un valor objetivo determinado.
+      Está diseñado para el formato numérico argentino, utilizando coma (<code>,</code>) como separador decimal
+      y sin utilizar el punto (<code>.</code>) como separador de miles.
     </p>
 
-    <h2>Archivos principales</h2>
-    <ul>
-      <li><code>combinador_sumandos.py</code> — Código principal del programa.</li>
-      <li><code>sumandos.txt</code> — Archivo de ejemplo con valores de entrada.</li>
-      <li><code>soluciones_sumandos.txt</code> — Resultados generados automáticamente.</li>
-    </ul>
+    <div class="highlight">
+      ✅ Correcto: <code>3,50</code><br>
+      ❌ Incorrecto: <code>3.50</code> o <code>12.345</code>
+    </div>
+
+    <h2>🧮 Cantidad de combinaciones posibles</h2>
+    <p>
+      Cada sumando puede estar incluido (1) o excluido (0) en una combinación, por lo que el total crece de forma
+      <strong>exponencial</strong> según la fórmula:
+    </p>
+
+    <pre><code>Combinaciones totales = 2^n</code></pre>
+
+    <table>
+      <tr><th>Cantidad de sumandos (n)</th><th>Expresión</th><th>Total de combinaciones posibles</th></tr>
+      <tr><td>10</td><td>2¹⁰</td><td>1.024</td></tr>
+      <tr><td>20</td><td>2²⁰</td><td>1.048.576</td></tr>
+      <tr><td>30</td><td>2³⁰</td><td>1.073.741.824</td></tr>
+      <tr><td>40</td><td>2⁴⁰</td><td>1.099.511.627.776</td></tr>
+      <tr><td>50</td><td>2⁵⁰</td><td>1.125.899.906.842.624</td></tr>
+      <tr><td>100</td><td>2¹⁰⁰</td><td>≈ 1,27 × 10³⁰</td></tr>
+    </table>
+
+    <p>
+      🔹 Con solo 30 o 40 sumandos, ya hay miles de millones de combinaciones posibles.<br>
+      🔹 Se recomienda reducir el número de sumandos si es posible.
+    </p>
+
+    <h2>📄 Ejemplo de archivo <code>sumandos.txt</code></h2>
+    <pre><code>1,100
+2,950
+3,300
+4,000
+5,000
+6,000
+7,000
+8,100
+8,100
+9,000
+10,234</code></pre>
+
+    <h2>🚀 Cómo ejecutar</h2>
+    <ol>
+      <li>Instalar Python 3.9 o superior.</li>
+      <li>Instalar OR-Tools:
+        <pre><code>pip install ortools</code></pre>
+      </li>
+      <li>Colocar los archivos <code>combinador_sumandos.py</code> y <code>sumandos.txt</code> en la misma carpeta.</li>
+      <li>Ejecutar:
+        <pre><code>python combinador_sumandos.py</code></pre>
+      </li>
+    </ol>
 
     <a href="combinador_sumandos.py" class="button" download>⬇️ Descargar código fuente (Python)</a>
 
-    <h2>Instrucciones de uso</h2>
-    <p>Para ejecutar el programa localmente:</p>
-    <pre><code>pip install ortools
-python combinador_sumandos.py</code></pre>
-
-    <p>
-      El programa solicitará:
-      <ul>
-        <li>El nombre del archivo de sumandos (<code>sumandos.txt</code>).</li>
-        <li>El valor objetivo a alcanzar (por ejemplo, <code>19,35</code>).</li>
-        <li>El margen de error permitido (por ejemplo, <code>0,02</code>).</li>
-      </ul>
-    </p>
-
-    <h2>Advertencias</h2>
+    <h2>⚙️ Funcionalidades destacadas</h2>
     <ul>
-      <li>No uses punto (<code>.</code>) como separador de miles.</li>
-      <li>Usa coma decimal (<code>,</code>) para los valores.</li>
-      <li>El cálculo se realiza localmente, no en el navegador.</li>
+      <li>Margen de error configurable (0 o positivo).</li>
+      <li>Detección y advertencia de valores duplicados.</li>
+      <li>Identificación de combinaciones equivalentes.</li>
+      <li>Salida coloreada en consola (ANSI verde / amarillo / rojo).</li>
+      <li>Informe completo en archivo <code>soluciones_sumandos.txt</code>.</li>
+      <li>Mensajes informativos y claros ante errores o resultados vacíos.</li>
     </ul>
 
-    <h2>Autor</h2>
+    <h2>⚠️ Advertencias</h2>
+    <ul>
+      <li>No usar el punto (<code>.</code>) como separador de miles.</li>
+      <li>Usar coma (<code>,</code>) como separador decimal.</li>
+      <li>Un margen de error demasiado pequeño puede causar que no se encuentren soluciones exactas.</li>
+      <li>A mayor cantidad de sumandos, mayor crecimiento exponencial del tiempo de ejecución.</li>
+    </ul>
+
+    <h2>🧑‍💻 Autor</h2>
     <p>
       <strong>Código realizado por Vincenzo Natale</strong><br>
       📧 <a href="mailto:vnatale52@gmail.com">vnatale52@gmail.com</a><br>
