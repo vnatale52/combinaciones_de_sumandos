@@ -1,9 +1,3 @@
-# 🔢 Combinador de Sumandos con Google OR-Tools (Argentina)
-
-**Código realizado por Vincenzo Natale – vnatale52@gmail.com**
-
----
-
 ## 📘 Descripción General
 
 Este programa utiliza la librería **Google OR-Tools** (módulo `cp_model`) para encontrar **todas las combinaciones posibles de sumandos** que sumen un valor objetivo determinado.  
@@ -14,6 +8,24 @@ Ejemplo:
 ❌ Incorrecto → `3.50` o `12.345`  
 
 ---
+
+🧮 Cantidad de combinaciones posibles
+
+El número total de combinaciones que el solver debe evaluar crece exponencialmente con la cantidad de sumandos.
+Dado que cada sumando puede estar incluido (1) o excluido (0) en una combinación, el total de combinaciones posibles se calcula como:
+
+Combinaciones totales =  2 elevado a la n  ,    donde  n  es la cantidad de sumandos.
+
+Cantidad de sumandos (n)	
+10	 2¹⁰	   1.024            Total de combinaciones posibles
+20	 2²⁰	   1.048.576        Total de combinaciones posibles
+30	 2³⁰	   1.073.741.824    Total de combinaciones posibles
+40	 2⁴⁰	   1.099.511.627.776   Total de combinaciones posibles
+50	 2⁵⁰	   1.125.899.906.842.624    Total de combinaciones posibles
+100	 2¹⁰⁰   ≈ 1,27 × 10³⁰     Total de combinaciones posibles
+
+Esto significa que con apenas 30 o 40 sumandos, la cantidad de combinaciones posibles ya supera miles de millones, por lo que el tiempo de ejecución puede aumentar considerablemente.
+OR-Tools maneja eficientemente este crecimiento gracias a su motor de búsqueda de restricciones, pero se recomienda filtrar o limitar el conjunto de sumandos siempre que sea posible.
 
 ## 📦 Archivos incluidos
 
