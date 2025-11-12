@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combinador de Sumandos - Google OR-Tools</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #222;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #0078d7;
+      color: white;
+      text-align: center;
+      padding: 1.5em 1em;
+    }
+    main {
+      max-width: 900px;
+      margin: 2em auto;
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #0078d7;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    a.button {
+      display: inline-block;
+      background: #0078d7;
+      color: white;
+      padding: 10px 18px;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    a.button:hover {
+      background: #005fa3;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 1em;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔢 Combinador de Sumandos</h1>
+    <p>Basado en Google OR-Tools (Argentina)</p>
+  </header>
+
+  <main>
+    <h2>Descripción</h2>
+    <p>
+      Este proyecto utiliza la librería <strong>Google OR-Tools</strong> para encontrar todas las combinaciones
+      posibles de sumandos que alcanzan un objetivo dado, considerando un margen de error configurable.
+      Está diseñado para el formato numérico argentino, utilizando coma (<code>,</code>) como separador decimal.
+    </p>
+
+    <h2>Archivos principales</h2>
+    <ul>
+      <li><code>combinador_sumandos.py</code> — Código principal del programa.</li>
+      <li><code>sumandos.txt</code> — Archivo de ejemplo con valores de entrada.</li>
+      <li><code>soluciones_sumandos.txt</code> — Resultados generados automáticamente.</li>
+    </ul>
+
+    <a href="combinador_sumandos.py" class="button" download>⬇️ Descargar código fuente (Python)</a>
+
+    <h2>Instrucciones de uso</h2>
+    <p>Para ejecutar el programa localmente:</p>
+    <pre><code>pip install ortools
+python combinador_sumandos.py</code></pre>
+
+    <p>
+      El programa solicitará:
+      <ul>
+        <li>El nombre del archivo de sumandos (<code>sumandos.txt</code>).</li>
+        <li>El valor objetivo a alcanzar (por ejemplo, <code>19,35</code>).</li>
+        <li>El margen de error permitido (por ejemplo, <code>0,02</code>).</li>
+      </ul>
+    </p>
+
+    <h2>Advertencias</h2>
+    <ul>
+      <li>No uses punto (<code>.</code>) como separador de miles.</li>
+      <li>Usa coma decimal (<code>,</code>) para los valores.</li>
+      <li>El cálculo se realiza localmente, no en el navegador.</li>
+    </ul>
+
+    <h2>Autor</h2>
+    <p>
+      <strong>Código realizado por Vincenzo Natale</strong><br>
+      📧 <a href="mailto:vnatale52@gmail.com">vnatale52@gmail.com</a><br>
+      © 2025 — Todos los derechos reservados.
+    </p>
+  </main>
+
+  <footer>
+    Despliegue en GitHub Pages — Proyecto: Combinador de Sumandos con OR-Tools
+  </footer>
+</body>
+</html>
