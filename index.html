@@ -15,93 +15,109 @@
       padding: 0;
       animation: fadeIn 1.2s ease-in;
     }
+
+    /* ===== Barra superior sticky ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: #2c2c2c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 6px 0; /* altura reducida */
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(60, 60, 60, 0.9); /* gris más claro y translúcido */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .navbar a {
+      display: inline-block;
+      color: #f8f8f8;
+      background: rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+      padding: 6px 14px; /* más compacto */
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+    /* ===== Encabezado reducido ===== */
     header {
       background: linear-gradient(270deg, #0078d7, #00a3ff, #0078d7);
       background-size: 600% 600%;
       animation: gradientShift 8s ease infinite;
       color: white;
       text-align: center;
-      padding: 2.5em 1em;
+      padding: 0.9em 1em; /* reducido aún más */
     }
+    header h1 {
+      font-size: 1.7em;
+      margin-bottom: 0.2em;
+    }
+    header p {
+      margin-top: 0;
+      font-size: 0.95em;
+      opacity: 0.9;
+    }
+
+    /* ===== Contenido principal ===== */
     main {
-      max-width: 960px;
+      max-width: 880px;
       margin: 2em auto;
       background: white;
-      padding: 2.5em;
+      padding: 1.8em;
       border-radius: 12px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
       animation: fadeIn 1.6s ease-in;
     }
-    h1, h2, h3 {
-      color: #0078d7;
-    }
+
+    h1, h2, h3 { color: #0078d7; margin-top: 1.4em; }
+
     code {
       background: #eee;
       padding: 2px 5px;
       border-radius: 4px;
       font-family: Consolas, monospace;
     }
+
     pre {
       background: #f0f0f0;
       padding: 10px;
       border-radius: 6px;
       overflow-x: auto;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 1em 0;
     }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
+
+    table, th, td { border: 1px solid #ccc; }
+
     th {
       background-color: #0078d7;
       color: white;
       text-align: center;
     }
+
     td {
       text-align: center;
       padding: 8px;
     }
 
-    /* ===== Botones ===== */
-    .button-container {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    a.button {
-      display: inline-block;
-      background: linear-gradient(90deg, #0078d7, #00a3ff);
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
-    a.button:hover {
-      background: linear-gradient(90deg, #00a3ff, #0078d7);
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Colores de botones */
-    .py-btn { background: linear-gradient(90deg, #0078d7, #00a3ff); }
-    .readme-btn { background: linear-gradient(90deg, #28a745, #58d26d); }
-    .view-btn { background: linear-gradient(90deg, #ffb300, #ffca28); color: #222; }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 1.5em;
-      font-size: 0.9em;
-      color: #555;
-      background-color: #f1f1f1;
-    }
     .highlight {
       background: #e8f4ff;
       border-left: 4px solid #0078d7;
@@ -110,19 +126,49 @@
       border-radius: 6px;
     }
 
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 1.1em;
+      font-size: 0.9em;
+      color: #555;
+      background-color: #f1f1f1;
+    }
+
     /* ===== Animaciones ===== */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
+    /* ===== Responsividad ===== */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+      }
+      header h1 { font-size: 1.4em; }
+      header p { font-size: 0.85em; }
+      main { padding: 1.4em; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Barra superior fija -->
+  <nav class="navbar" id="navbar">
+    <a href="combinador_sumandos.py" download>⬇️ Descargar código Python</a>
+    <a href="README.md" download>📘 Descargar README</a>
+    <a href="README.md" target="_blank">👁️ Ver README</a>
+  </nav>
+
   <header>
     <h1>🔢 Combinador de Sumandos</h1>
     <p>Basado en Google OR-Tools — Formato Regional Argentina</p>
@@ -190,12 +236,6 @@
       </li>
     </ol>
 
-    <div class="button-container">
-      <a href="combinador_sumandos.py" class="button py-btn" download>⬇️ Descargar código fuente (Python)</a>
-      <a href="README.md" class="button readme-btn" download>📘 Descargar documentación (README)</a>
-      <a href="README.md" class="button view-btn" target="_blank">👁️ Ver README en navegador</a>
-    </div>
-
     <h2>⚙️ Funcionalidades destacadas</h2>
     <ul>
       <li>Margen de error configurable (0 o positivo).</li>
@@ -225,5 +265,18 @@
   <footer>
     Despliegue en GitHub Pages — Proyecto: Combinador de Sumandos con OR-Tools
   </footer>
+
+  <!-- ===== Script para cambio de color de la barra sticky ===== -->
+  <script>
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 30) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+
 </body>
 </html>
