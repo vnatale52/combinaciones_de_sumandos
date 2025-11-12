@@ -64,20 +64,36 @@
       text-align: center;
       padding: 8px;
     }
+
+    /* ===== Botones ===== */
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
     a.button {
       display: inline-block;
-      background: #0078d7;
+      background: linear-gradient(90deg, #0078d7, #00a3ff);
       color: white;
-      padding: 10px 18px;
+      padding: 10px 20px;
       text-decoration: none;
-      border-radius: 6px;
-      margin-top: 10px;
-      transition: background 0.3s, transform 0.2s;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
     a.button:hover {
-      background: #005fa3;
+      background: linear-gradient(90deg, #00a3ff, #0078d7);
       transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
+
+    /* Colores de botones */
+    .py-btn { background: linear-gradient(90deg, #0078d7, #00a3ff); }
+    .readme-btn { background: linear-gradient(90deg, #28a745, #58d26d); }
+    .view-btn { background: linear-gradient(90deg, #ffb300, #ffca28); color: #222; }
+
     footer {
       text-align: center;
       margin-top: 40px;
@@ -174,7 +190,11 @@
       </li>
     </ol>
 
-    <a href="combinador_sumandos.py" class="button" download>⬇️ Descargar código fuente (Python)</a>
+    <div class="button-container">
+      <a href="combinador_sumandos.py" class="button py-btn" download>⬇️ Descargar código fuente (Python)</a>
+      <a href="README.md" class="button readme-btn" download>📘 Descargar documentación (README)</a>
+      <a href="README.md" class="button view-btn" target="_blank">👁️ Ver README en navegador</a>
+    </div>
 
     <h2>⚙️ Funcionalidades destacadas</h2>
     <ul>
