@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Combinador de Sumandos</title>
   <style>
-    /* ===== Estilos base ===== */
     body {
       font-family: "Segoe UI", Arial, sans-serif;
       background-color: #f8f9fa;
       color: #222;
-      line-height: 1.6;
       margin: 0;
       padding: 0;
-      animation: fadeIn 1.2s ease-in;
     }
 
     /* ===== Barra superior sticky ===== */
@@ -25,26 +22,24 @@
       justify-content: center;
       align-items: center;
       gap: 15px;
-      padding: 6px 0; /* altura reducida */
+      padding: 6px 0;
       z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
       transition: background 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     }
 
     .navbar.scrolled {
-      background: rgba(60, 60, 60, 0.9); /* gris más claro y translúcido */
+      background: rgba(60, 60, 60, 0.9);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
     }
 
     .navbar a {
-      display: inline-block;
       color: #f8f8f8;
       background: rgba(255, 255, 255, 0.08);
       text-decoration: none;
-      padding: 6px 14px; /* más compacto */
+      padding: 6px 14px;
       border-radius: 8px;
       font-weight: bold;
-      font-size: 0.95em;
       transition: all 0.3s ease;
     }
 
@@ -53,14 +48,13 @@
       transform: scale(1.05);
     }
 
-    /* ===== Encabezado reducido ===== */
     header {
       background: linear-gradient(270deg, #0078d7, #00a3ff, #0078d7);
       background-size: 600% 600%;
       animation: gradientShift 8s ease infinite;
       color: white;
       text-align: center;
-      padding: 0.9em 1em; /* reducido aún más */
+      padding: 0.9em 1em;
     }
     header h1 {
       font-size: 1.7em;
@@ -72,7 +66,6 @@
       opacity: 0.9;
     }
 
-    /* ===== Contenido principal ===== */
     main {
       max-width: 880px;
       margin: 2em auto;
@@ -80,10 +73,12 @@
       padding: 1.8em;
       border-radius: 12px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-      animation: fadeIn 1.6s ease-in;
     }
 
-    h1, h2, h3 { color: #0078d7; margin-top: 1.4em; }
+    h2 {
+      color: #0078d7;
+      margin-top: 1.4em;
+    }
 
     code {
       background: #eee;
@@ -99,31 +94,29 @@
       overflow-x: auto;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1em 0;
+    #output {
+      background: #f4f4f4;
+      border-radius: 8px;
+      padding: 1em;
+      margin-top: 1em;
+      white-space: pre-wrap;
+      font-family: Consolas, monospace;
+      color: #111;
     }
 
-    table, th, td { border: 1px solid #ccc; }
-
-    th {
-      background-color: #0078d7;
+    button {
+      background: #0078d7;
       color: white;
-      text-align: center;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
     }
 
-    td {
-      text-align: center;
-      padding: 8px;
-    }
-
-    .highlight {
-      background: #e8f4ff;
-      border-left: 4px solid #0078d7;
-      padding: 10px 15px;
-      margin: 1em 0;
-      border-radius: 6px;
+    button:hover {
+      background: #005fa3;
     }
 
     footer {
@@ -135,34 +128,28 @@
       background-color: #f1f1f1;
     }
 
-    /* ===== Animaciones ===== */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
-    /* ===== Responsividad ===== */
     @media (max-width: 600px) {
       .navbar {
         flex-direction: column;
         gap: 8px;
         padding: 8px;
       }
-      header h1 { font-size: 1.4em; }
-      header p { font-size: 0.85em; }
-      main { padding: 1.4em; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Barra superior fija -->
   <nav class="navbar" id="navbar">
     <a href="combinador_sumandos.py" download>⬇️ Descargar código Python</a>
     <a href="README.md" download>📘 Descargar README</a>
@@ -171,112 +158,81 @@
 
   <header>
     <h1>🔢 Combinador de Sumandos</h1>
-    <p>Basado en Google OR-Tools — Formato Regional Argentina</p>
+    <p>Basado en Google OR-Tools — Ejecución directa en el navegador con Pyodide</p>
   </header>
 
   <main>
-    <h2>📘 Descripción General</h2>
-    <p>
-      Este programa utiliza la librería <strong>Google OR-Tools</strong> (módulo <code>cp_model</code>)
-      para encontrar todas las combinaciones posibles de sumandos que sumen un valor objetivo determinado.
-      Está diseñado para el formato numérico argentino, utilizando coma (<code>,</code>) como separador decimal
-      y sin utilizar el punto (<code>.</code>) como separador de miles.
-    </p>
+    <h2>⚙️ Ejecutar Combinaciones</h2>
+    <p>Sube tu archivo <code>sumandos.txt</code>, indica el valor objetivo y el margen de error.</p>
 
-    <div class="highlight">
-      ✅ Correcto: <code>3,50</code><br>
-      ❌ Incorrecto: <code>3.50</code> o <code>12.345</code>
-    </div>
+    <input type="file" id="fileInput" accept=".txt" /><br><br>
+    <label for="objetivo">Objetivo: </label>
+    <input type="number" id="objetivo" step="0.01" />  
+    <label for="margen">Margen (ej. 0.02): </label>
+    <input type="number" id="margen" step="0.01" value="0.01" />
+    <br><br>
+    <button id="runButton">🔍 Calcular combinaciones</button>
 
-    <h2>🧮 Cantidad de combinaciones posibles</h2>
-    <p>
-      Cada sumando puede estar incluido (1) o excluido (0) en una combinación, por lo que el total crece de forma
-      <strong>exponencial</strong> según la fórmula:
-    </p>
-
-    <pre><code>Combinaciones totales = 2^n</code></pre>
-
-    <table>
-      <tr><th>Cantidad de sumandos (n)</th><th>Expresión</th><th>Total de combinaciones posibles</th></tr>
-      <tr><td>10</td><td>2¹⁰</td><td>1.024</td></tr>
-      <tr><td>20</td><td>2²⁰</td><td>1.048.576</td></tr>
-      <tr><td>30</td><td>2³⁰</td><td>1.073.741.824</td></tr>
-      <tr><td>40</td><td>2⁴⁰</td><td>1.099.511.627.776</td></tr>
-      <tr><td>50</td><td>2⁵⁰</td><td>1.125.899.906.842.624</td></tr>
-      <tr><td>100</td><td>2¹⁰⁰</td><td>≈ 1,27 × 10³⁰</td></tr>
-    </table>
-
-    <p>
-      🔹 Con solo 30 o 40 sumandos, ya hay miles de millones de combinaciones posibles.<br>
-      🔹 Se recomienda reducir el número de sumandos si es posible.
-    </p>
-
-    <h2>📄 Ejemplo de archivo <code>sumandos.txt</code></h2>
-    <pre><code>1,100
-2,950
-3,300
-4,000
-5,000
-6,000
-7,000
-8,100
-8,100
-9,000
-10,234</code></pre>
-
-    <h2>🚀 Cómo ejecutar</h2>
-    <ol>
-      <li>Instalar Python 3.9 o superior.</li>
-      <li>Instalar OR-Tools:
-        <pre><code>pip install ortools</code></pre>
-      </li>
-      <li>Colocar los archivos <code>combinador_sumandos.py</code> y <code>sumandos.txt</code> en la misma carpeta.</li>
-      <li>Ejecutar:
-        <pre><code>python combinador_sumandos.py</code></pre>
-      </li>
-    </ol>
-
-    <h2>⚙️ Funcionalidades destacadas</h2>
-    <ul>
-      <li>Margen de error configurable (0 o positivo).</li>
-      <li>Detección y advertencia de valores duplicados.</li>
-      <li>Identificación de combinaciones equivalentes.</li>
-      <li>Salida coloreada en consola (ANSI verde / amarillo / rojo).</li>
-      <li>Informe completo en archivo <code>soluciones_sumandos.txt</code>.</li>
-      <li>Mensajes informativos y claros ante errores o resultados vacíos.</li>
-    </ul>
-
-    <h2>⚠️ Advertencias</h2>
-    <ul>
-      <li>No usar el punto (<code>.</code>) como separador de miles.</li>
-      <li>Usar coma (<code>,</code>) como separador decimal.</li>
-      <li>Un margen de error demasiado pequeño puede causar que no se encuentren soluciones exactas.</li>
-      <li>A mayor cantidad de sumandos, mayor crecimiento exponencial del tiempo de ejecución.</li>
-    </ul>
-
-    <h2>🧑‍💻 Autor</h2>
-    <p>
-      <strong>Código realizado por Vincenzo Natale</strong><br>
-      📧 <a href="mailto:vnatale52@gmail.com">vnatale52@gmail.com</a><br>
-      © 2025 — Todos los derechos reservados.
-    </p>
+    <div id="output">Esperando datos...</div>
   </main>
 
   <footer>
-    Despliegue en GitHub Pages — Proyecto: Combinador de Sumandos con OR-Tools
+    Despliegue en GitHub Pages — Proyecto: Combinador de Sumandos con Pyodide<br>
+    © 2025 — Código realizado por Vincenzo Natale · vnatale52@gmail.com
   </footer>
 
-  <!-- ===== Script para cambio de color de la barra sticky ===== -->
+  <!-- Pyodide -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
   <script>
     const navbar = document.getElementById("navbar");
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 30) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
+      navbar.classList.toggle("scrolled", window.scrollY > 30);
+    });
+
+    let pyodide;
+    async function loadPyodideAndPackages() {
+      pyodide = await loadPyodide();
+      document.getElementById("output").textContent = "✅ Pyodide cargado correctamente. Esperando archivo...";
+    }
+    loadPyodideAndPackages();
+
+    document.getElementById("runButton").addEventListener("click", async () => {
+      const fileInput = document.getElementById("fileInput");
+      const objetivo = parseFloat(document.getElementById("objetivo").value);
+      const margen = parseFloat(document.getElementById("margen").value);
+      const output = document.getElementById("output");
+
+      if (!fileInput.files[0]) {
+        output.textContent = "⚠️ Por favor selecciona un archivo sumandos.txt.";
+        return;
       }
+      const text = await fileInput.files[0].text();
+      const lines = text.split(/[\r\n]+/).map(l => l.trim()).filter(l => l !== "");
+      const sumandos = lines.map(v => parseFloat(v.replace(",", ".")));
+
+      const code = `
+sumandos = ${JSON.stringify(sumandos)}
+objetivo = ${objetivo}
+margen = ${margen}
+soluciones = []
+from itertools import combinations
+for r in range(1, len(sumandos)+1):
+  for combo in combinations(sumandos, r):
+    if abs(sum(combo) - objetivo) <= margen:
+      soluciones.append(combo)
+if soluciones:
+  for i, s in enumerate(soluciones, 1):
+    print(f"Solución {i}: {', '.join(f'{x:.2f}' for x in s)} => Total: {sum(s):.2f}")
+else:
+  print("❌ No se encontraron combinaciones dentro del margen especificado.")
+`;
+      output.textContent = "⏳ Calculando...";
+      await pyodide.runPythonAsync(code);
+      const result = pyodide.runPython("''.join([''])");
+      output.textContent = pyodide.runPython("''"); // limpia buffer
+      const logs = await pyodide.runPythonAsync(code);
+      output.textContent = logs ? logs : "✅ Cálculo completado.";
     });
   </script>
-
 </body>
 </html>
