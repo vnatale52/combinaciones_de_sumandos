@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Combinador de Sumandos</title>
+  <title>Combinatoria de Sumandos</title>
   <style>
     body{font-family:"Segoe UI",Arial,sans-serif;background:#f8f9fa;color:#222;margin:0}
     .navbar{position:sticky;top:0;background:#2c2c2c;display:flex;justify-content:center;gap:15px;padding:6px 0;z-index:1000;box-shadow:0 2px 6px rgba(0,0,0,.25)}
@@ -12,13 +12,6 @@
     header{background:linear-gradient(270deg,#0078d7,#00a3ff,#0078d7);background-size:600% 600%;animation:gradientShift 8s ease infinite;color:white;text-align:center;padding:.8em 1em}
     header h1{font-size:1.6em;margin-bottom:.2em}header p{margin-top:0;font-size:.95em;opacity:.9}
     main{max-width:880px;margin:2em auto;background:white;padding:1.8em;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
-    #summaryBox,#detailsBox{background:#eef6ff;border-left:4px solid #0078d7;padding:12px 15px;border-radius:8px;margin-top:15px;font-family:"Segoe UI",sans-serif}
-    #summaryBox strong{color:#004a99}
-    #summaryIcon{font-size:1.4em;margin-right:8px;vertical-align:middle}
-    #statusMessage{font-weight:bold;margin-top:10px;text-align:center;animation:fadeBlink 1.2s infinite;display:flex;align-items:center;justify-content:center;gap:8px}
-    @keyframes fadeBlink{0%,100%{opacity:1}50%{opacity:.3}}
-    .spinner{border:4px solid #cfe2ff;border-top:4px solid #0078d7;border-radius:50%;width:20px;height:20px;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle}
-    @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
     #output{background:#f4f4f4;border-radius:8px;padding:1em;margin-top:1em;white-space:pre-wrap;font-family:Consolas,monospace;color:#111}
     button{background:#0078d7;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-weight:bold;transition:background .3s}
     button:hover{background:#005fa3}
@@ -26,50 +19,126 @@
     @keyframes glow{0%{box-shadow:0 0 6px #0078d7}100%{box-shadow:0 0 18px #00a3ff}}
     footer{text-align:center;margin-top:40px;padding:1.1em;font-size:.9em;color:#555;background-color:#f1f1f1}
     @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .collapsible{background:#0078d7;color:white;cursor:pointer;padding:12px;width:100%;border:none;text-align:left;outline:none;font-size:1em;font-weight:bold;border-radius:8px;margin-bottom:10px;transition:background .3s}
+    .collapsible:hover{background:#005fa3}
+    .collapsible.active{background:#005fa3}
+    .content{padding:0 18px;max-height:0;overflow:hidden;transition:max-height .3s ease-out;background-color:#f9f9f9;border-radius:8px}
+    .content.show{max-height:2000px;padding:18px;margin-bottom:20px}
+    .use-case{background:white;padding:12px;margin:10px 0;border-left:4px solid #0078d7;border-radius:4px}
+    .use-case h4{margin-top:0;color:#0078d7}
+    .example-section{background:#e8f4fd;padding:15px;border-radius:8px;margin:15px 0;text-align:center}
+    .example-buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
   </style>
 </head>
 <body>
   <nav class="navbar">
-    <a href="combinador_sumandos.py" download>⬇️ Descargar código Python</a>
+    <a href="combinación_de_sumandos.py" download>⬇️ Descargar código Python</a>
     <a href="README.md" download>📘 Descargar README</a>
     <a href="README.md" target="_blank">👁️ Ver README</a>
   </nav>
 
   <header>
-    <h1>🔢 Combinador de Sumandos</h1>
+    <h1>🔢 Combinatoria de Sumandos</h1>
     <p>Basado en Google OR-Tools — Ejecución directa en el navegador con Pyodide</p>
+    <p> This Web page is Under Construction and testing - By Vincenzo Natale </p>
   </header>
 
   <main>
+    <button class="collapsible">🎯 Casos de Uso Prácticos - ¿Para qué sirve esta aplicación?</button>
+    <div class="content">
+      <p><strong>Esta aplicación es especialmente útil en contabilidad, auditoría, administración tributaria y financiera y cualquier contexto donde necesites descomponer un total en sus sumandos originales.</strong></p>
+      
+      <div class="use-case">
+        <h4>💼 1. Conciliaciones Contables</h4>
+        <p><strong>Problema:</strong> Tienes un total general en el extracto bancario, pero necesitas identificar qué facturas o pagos específicos lo componen.</p>
+        <p><strong>Ejemplo:</strong> El banco muestra un depósito de $45.678,90 pero no sabes qué clientes pagaron. Cargas todas las facturas pendientes como sumandos, estableces $45.678,90 como objetivo, y el sistema identifica exactamente qué facturas fueron pagadas.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>📊 2. Auditoría y Control de Diferencias</h4>
+        <p><strong>Problema:</strong> Existe una diferencia en la conciliación que necesitas componer qué partidas individuales (sumandos, sea con signo positivo o signo negativo) integran dicha diferencia.</p>
+        <p><strong>Ejemplo:</strong> Hay una diferencia de $1.234,56 entre dos reportes. Cargas todas las transacciones del período y el sistema te muestra qué combinación de movimientos explica esa diferencia exacta.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>🔍 3. Detección de Errores de Carga Múltiple</h4>
+        <p><strong>Problema:</strong> Sospechas que una misma factura fue cargada dos o más veces.</p>
+        <p><strong>Ejemplo:</strong> El total de gastos da $8.500,00 pero debería ser $4.250,00. Cargas todos los gastos y buscas combinaciones que sumen exactamente la mitad, revelando duplicaciones.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>💰 4. Reconciliación de Pagos en Efectivo</h4>
+        <p><strong>Problema:</strong> La caja registra un total pero necesitas saber qué billetes y monedas específicos lo componen.</p>
+        <p><strong>Ejemplo:</strong> Tienes $12.450,00 en caja. Cargas los valores de todos los billetes y monedas contados, y verificas si alguna combinación suma exactamente ese total (o detectas faltantes/sobrantes).</p>
+      </div>
+
+      <div class="use-case">
+        <h4>🏦 5. Análisis de Transferencias Agrupadas</h4>
+        <p><strong>Problema:</strong> Recibiste una transferencia única que agrupa varios conceptos.</p>
+        <p><strong>Ejemplo:</strong> Llega una transferencia de $23.789,45 que incluye varios pagos. Cargas todas las cuentas por cobrar y descubres qué clientes específicos pagaron en ese lote.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>📦 6. Control de Inventario y Valuación</h4>
+        <p><strong>Problema:</strong> Necesitas identificar qué items específicos componen un valor total de inventario.</p>
+        <p><strong>Ejemplo:</strong> Un pallet valorizado en $156.890,00 contiene múltiples productos. Cargas los valores unitarios de cada item y descubres la composición exacta del pallet.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>⚖️ 7. Resolución de Disputas Comerciales</h4>
+        <p><strong>Problema:</strong> Un cliente afirma haber pagado cierto monto pero no tienes claro qué facturas específicas cubrió.</p>
+        <p><strong>Ejemplo:</strong> El cliente dice "pagué $67.543,21". Cargas todas sus facturas pendientes y el sistema muestra exactamente qué facturas quedaron cubiertas con ese pago.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>🧾 8. Análisis de Gastos por Categoría</h4>
+        <p><strong>Problema:</strong> Tienes un total de gastos en una categoría pero necesitas identificar las transacciones específicas.</p>
+        <p><strong>Ejemplo:</strong> Los gastos de "Servicios" totalizan $34.567,89. Cargas todos los recibos y verificas que la suma sea correcta, o detectas transacciones mal categorizadas.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>💳 9. Conciliación de Tarjetas de Crédito Corporativas</h4>
+        <p><strong>Problema:</strong> El resumen de la tarjeta muestra un total pero necesitas validar contra los comprobantes individuales.</p>
+        <p><strong>Ejemplo:</strong> El resumen indica $89.234,67 en compras. Cargas todos los tickets y verificas que coincidan, o detectas cargos no autorizados.</p>
+      </div>
+
+      <div class="use-case">
+        <h4>🔢 10. Optimización de Pagos con Fondos Limitados</h4>
+        <p><strong>Problema:</strong> Tienes un monto disponible y necesitas decidir qué facturas pagar exactamente.</p>
+        <p><strong>Ejemplo:</strong> Dispones de $100.000,00 y tienes 30 facturas pendientes. El sistema te muestra todas las combinaciones posibles de facturas que puedes pagar sin exceder ese monto.</p>
+      </div>
+
+      <p style="margin-top:20px;"><strong>🌟 Ventajas Clave:</strong></p>
+      <ul>
+        <li>✅ <strong>Precisión Total:</strong> Encuentra combinaciones exactas sin aproximaciones</li>
+        <li>✅ <strong>Exhaustividad:</strong> Muestra TODAS las combinaciones posibles</li>
+        <li>✅ <strong>Flexibilidad:</strong> Acepta margen de error o dispersión o tolerancia, para casos con redondeos de centavos o importes inmateriales o no signifcativos</li>
+        <li>✅ <strong>Formato Local:</strong> Diseñado específicamente para números en formato local utilizado en Argentina</li>
+        <li>✅ <strong>Sin Infraestructura:</strong> La versión Web funciona 100% en el navegador</li>
+      </ul>
+    </div>
+
+    <div class="example-section">
+      <h3>📥 Archivo de Ejemplo</h3>
+      <p>Descarga un archivo de ejemplo completo con un caso práctico de conciliación contable:</p>
+      <div class="example-buttons">
+        <button onclick="descargarEjemplo()">📄 Descargar sumandos_ejemplo.txt</button>
+        <button onclick="descargarInstrucciones()">📋 Descargar instrucciones de uso</button>
+      </div>
+      <p style="margin-top:10px;font-size:0.9em;color:#555;">
+        <strong>Caso práctico incluido:</strong> 20 facturas pendientes de cobro. Objetivo: encontrar cuáles suman $15.242,20
+      </p>
+    </div>
+
     <h2>⚙️ Ejecutar Combinaciones</h2>
-    <p>Sube tu archivo <code>sumandos.txt</code>, indica el valor objetivo y el margen de error o dispersión en más o en menos.</p>
+    <p>Sube tu archivo <code>sumandos.txt</code> en formato argentino (coma decimal, sin puntos de miles), indica el valor objetivo y el margen de error o dispersión.</p>
     <input type="file" id="fileInput" accept=".txt" /><br><br>
     <label for="objetivo">Objetivo: </label>
-    <input type="number" id="objetivo" step="0.01" />  
-    <label for="margen">Margen (ej. 0.02): </label>
-    <input type="number" id="margen" step="0.01" value="0.00" />
+    <input type="text" id="objetivo" placeholder="ej. 19,35" />  
+    <label for="margen">Margen (ej. 0,02): </label>
+    <input type="text" id="margen" placeholder="ej. 0,01" value="0,00" />
     <br><br>
     <button id="runButton">🔍 Calcular combinaciones</button>
-
-    <div id="summaryBox" style="display:none;">
-      <span id="summaryIcon"></span><strong>Resumen:</strong><br>
-      🕒 <span id="summaryTime"></span><br>
-      🔢 <span id="summaryComb"></span><br>
-      📄 <span id="summarySumandos"></span><br>
-      💰 <span id="summaryMargin"></span>
-      <div id="statusMessage"></div>
-    </div>
-
-    <div id="detailsBox" style="display:none;">
-      <strong>📄 Detalles del cálculo</strong><br>
-      🕒 Inicio: <span id="detalleInicio"></span><br>
-      🕕 Fin: <span id="detalleFin"></span><br>
-      🎯 Objetivo: <span id="detalleObjetivo"></span><br>
-      💰 Margen de error o dispersión en más o en menos: <span id="detalleMargen"></span><br>
-      📈 Rango válido: <span id="detalleRango"></span><br>
-      ⚙️ Condición aplicada: <span id="detalleCondicion"></span><br>
-      ⏱️ Tiempo total: <span id="detalleTiempo"></span>
-    </div>
 
     <div id="output">Esperando datos...</div>
     <div id="downloadContainer" style="display:none; text-align:center; margin-top:20px;">
@@ -78,7 +147,7 @@
   </main>
 
   <footer>
-    Despliegue en GitHub Pages — Proyecto: Combinador de Sumandos con Pyodide<br>
+    Despliegue en GitHub Pages — Proyecto: Combinatoria de Sumandos con Pyodide<br>
     © 2025 — Código realizado por Vincenzo Natale · vnatale52@gmail.com
   </footer>
 
@@ -92,14 +161,26 @@
     }
     loadPyodideAndPackages();
 
+    function verificarFormatoCadena(cad) {
+      // Control simple: no debe contener punto como separador de miles
+      if (cad.indexOf('.') !== -1) {
+        return { valido: false, mensaje: "Contiene punto (.) — posible separador de miles." };
+      }
+      if (cad.indexOf(',') !== -1) {
+        // tiene coma decimal, intentamos parsear
+        const v = parseFloat(cad.replace(",", "."));
+        return isNaN(v) ? { valido: false, mensaje: "No convertible con coma decimal." } : { valido: true, mensaje: "Formato correcto (coma decimal)." , valor:v};
+      }
+      // entero sin separadores — válido
+      const v = parseFloat(cad);
+      return isNaN(v) ? { valido: false, mensaje: "No es un número válido." } : { valido: true, mensaje: "Formato correcto (entero sin separadores)." , valor:v};
+    }
+
     document.getElementById("runButton").addEventListener("click", async () => {
       const fileInput = document.getElementById("fileInput");
-      const objetivo = parseFloat(document.getElementById("objetivo").value);
-      const margenOriginal = parseFloat(document.getElementById("margen").value);
+      const objetivoStr = document.getElementById("objetivo").value.trim();
+      const margenStr = document.getElementById("margen").value.trim();
       const output = document.getElementById("output");
-      const summaryBox = document.getElementById("summaryBox");
-      const detailsBox = document.getElementById("detailsBox");
-      const status = document.getElementById("statusMessage");
       const downloadContainer = document.getElementById("downloadContainer");
 
       downloadContainer.style.display = "none";
@@ -112,28 +193,77 @@
       const inicio = new Date();
       const startTime = performance.now();
       const text = await fileInput.files[0].text();
-      const lines = text.split(/[\r\n]+/).map(l => l.trim()).filter(l => l !== "");
-      const sumandos = lines.map(v => parseFloat(v.replace(",", ".")));
+      const linesRaw = text.split(/[\r\n]+/).map(l => l.trim()).filter(l => l !== "");
 
-      // Duplicados
-      const duplicados = {};
-      lines.forEach(v => { duplicados[v] = (duplicados[v] || 0) + 1; });
-      const duplicadosEncontrados = Object.entries(duplicados).filter(([k, v]) => v > 1);
+      // Control de formato por línea
+      let controlLines = [];
+      let sumandos = [];
+      for (const l of linesRaw) {
+        const hasDot = l.indexOf('.') !== -1;
+        const hasComma = l.indexOf(',') !== -1;
+        if (hasDot) {
+          // intento de conversión automática, pero registro la detección
+          let converted = parseFloat(l.replace(/\./g, '').replace(',', '.'));
+          if (isNaN(converted)) {
+            controlLines.push(`${l} -> ❌ Formato inválido: contiene punto y no convertible.`);
+            continue;
+          } else {
+            controlLines.push(`${l} -> ❌ Contiene punto (se asumió separador de miles). Conversión automática aplicada.`);
+            sumandos.push(converted);
+            continue;
+          }
+        }
+        if (hasComma) {
+          let converted = parseFloat(l.replace(',', '.'));
+          if (isNaN(converted)) {
+            controlLines.push(`${l} -> ❌ Contiene coma pero no convertible.`);
+            continue;
+          } else {
+            controlLines.push(`${l} -> ✅ Formato correcto (coma decimal).`);
+            sumandos.push(converted);
+            continue;
+          }
+        }
+        // entero sin separadores
+        let converted = parseFloat(l);
+        if (isNaN(converted)) {
+          controlLines.push(`${l} -> ❌ No convertible.`);
+        } else {
+          controlLines.push(`${l} -> ✅ Formato correcto (entero sin separadores).`);
+          sumandos.push(converted);
+        }
+      }
 
-      const margen = Math.abs(margenOriginal);
+      // Verificación objetivo y margen
+      const objCheck = verificarFormatoCadena(objetivoStr);
+      const margenCheck = verificarFormatoCadena(margenStr);
+
+      // Parseo (permitimos conversión automática si había puntos pero lo informamos)
+      let objetivo = objCheck.valor !== undefined ? objCheck.valor : parseFloat(objetivoStr.replace(/\./g, '').replace(',', '.'));
+      let margen = margenCheck.valor !== undefined ? margenCheck.valor : parseFloat(margenStr.replace(/\./g, '').replace(',', '.'));
+      if (isNaN(objetivo) || isNaN(margen)) {
+        output.textContent = "❌ Objetivo o margen no válidos tras intento de conversión.";
+        return;
+      }
+
+      // Ajuste de margen a positivo si hay negativo (se informa)
+      if (margen < 0) margen = Math.abs(margen);
+
       const rangoMin = (objetivo - margen).toLocaleString("es-AR", {minimumFractionDigits:2});
       const rangoMax = (objetivo + margen).toLocaleString("es-AR", {minimumFractionDigits:2});
       const condicion = margen === 0 ? "suma_total == objetivo" : "objetivo - margen ≤ suma_total ≤ objetivo + margen";
 
       clearInterval(counterInterval);
       let count = 0;
-      status.innerHTML = `<div class="spinner"></div> 🔄 Buscando combinaciones... 0`;
-      status.style.color = "#0078d7";
-      summaryBox.style.display = "block";
-      detailsBox.style.display = "block";
+      const statusDiv = document.createElement("div");
+      statusDiv.style.marginTop = "8px";
+      statusDiv.textContent = "🔄 Buscando combinaciones...";
+      output.innerHTML = "";
+      output.appendChild(statusDiv);
+
       counterInterval = setInterval(() => {
         count++;
-        status.innerHTML = `<div class="spinner"></div> 🔄 Buscando combinaciones... ${count}`;
+        statusDiv.textContent = `🔄 Buscando combinaciones... ${count}`;
       }, 500);
 
       const code = `
@@ -150,55 +280,72 @@ output=""
 if soluciones:
   for i,s in enumerate(soluciones,1):
     exacta = " [EXACTA]" if abs(sum(s)-objetivo)<1e-9 else ""
-    output+=f"--- Solución {i}{exacta} ---\\nCombinación:\\n"+"\\n".join([f"  {x:.2f}" for x in s])+f"\\nSuma total: {sum(s):.2f}\\n\\n"
+    if exacta:
+      nota = "EXACTO"
+    else:
+      nota = "HALLADA APLICANDO MARGEN"
+    output+=f"--- Solución {i}{exacta} ---\\nCombinación:\\n"+"\\n".join([f"  {x:.2f}" for x in s])+f"\\nSuma total: {sum(s):.2f} ({nota})\\n\\n"
 else:
   output="❌ No se encontraron combinaciones dentro del margen especificado.\\n"
 output`;
-      output.textContent = "⏳ Calculando...";
       const logs = await pyodide.runPythonAsync(code);
       clearInterval(counterInterval);
 
       const fin = new Date();
       const elapsed = ((performance.now() - startTime) / 1000).toFixed(3);
+      const elapsedNum = parseFloat(elapsed);
+      const horas = Math.floor(elapsedNum / 3600);
+      const minutos = Math.floor((elapsedNum % 3600) / 60);
+      const segundos = Math.floor(elapsedNum % 60);
+      const tiempoFormateado = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
       const numComb = (logs.match(/Solución/g) || []).length;
 
-      const icon = document.getElementById("summaryIcon");
       if (numComb > 0) {
-        icon.textContent = "✔️"; icon.style.color = "green"; status.style.color = "green";
-        status.innerHTML = `✅ Se encontraron ${numComb} combinaciones.`;
+        statusDiv.textContent = `✅ Se encontraron ${numComb} combinaciones.`;
+        statusDiv.style.color = "green";
       } else {
-        icon.textContent = "❌"; icon.style.color = "red"; status.style.color = "red";
-        status.innerHTML = `❌ No se encontraron combinaciones.`;
+        statusDiv.textContent = `❌ No se encontraron combinaciones.`;
+        statusDiv.style.color = "red";
       }
 
       // Texto duplicados
+      const counts = {};
+      linesRaw.forEach(v => { counts[v] = (counts[v] || 0) + 1; });
+      const dup = Object.entries(counts).filter(([k, v]) => v > 1);
       let textoDuplicados = "";
-      if (duplicadosEncontrados.length > 0) {
+      if (dup.length > 0) {
         textoDuplicados = "Atención: Se detectaron valores duplicados en el archivo:\n";
-        duplicadosEncontrados.forEach(([valor, veces]) => { textoDuplicados += `   - ${valor} aparece ${veces} veces\n`; });
+        dup.forEach(([valor, veces]) => { textoDuplicados += `   - ${valor} aparece ${veces} veces\n`; });
         textoDuplicados += "   Estos duplicados pueden generar combinaciones equivalentes.\n";
       } else {
-        textoDuplicados = "✅ No se detectaron combinaciones equivalentes generadas por duplicados.\n";
+        textoDuplicados = "✅ No se detectaron combinaciones equivalentes generadas por sumandos que estén repetidos.\n";
       }
 
       const fmt = n => n.toLocaleString("es-AR", {minimumFractionDigits:2});
       resultText = `
 ------------------------------------------------------------
-🔢 COMBINADOR DE SUMANDOS — Versión Web (Pyodide)
+🔢 COMBINATORIA DE SUMANDOS — Versión Web (Pyodide)
 ------------------------------------------------------------
-📄 Detalles del cálculo
+<strong>Detalles del cálculo:</strong>
 🕒 Inicio: ${inicio.toLocaleString()}
 🕕 Fin: ${fin.toLocaleString()}
 🎯 Objetivo: ${fmt(objetivo)}
 💰 Margen de error o dispersión en más o en menos: ±${fmt(margen)} pesos
 📈 Rango válido: desde ${rangoMin} hasta ${rangoMax}
 ⚙️ Condición aplicada: ${condicion}
-🕒 Tiempo total: ${elapsed} segundos
+🕒 Tiempo total: ${elapsed} segundos  |  ${tiempoFormateado} (hh:mm:ss)
+
+🔎 Control de formato del archivo de entrada (Argentina):
+${controlLines.join("\n")}
+
+🔎 Control de formato - objetivo/margen:
+Objetivo: ${objCheck.mensaje || ""}
+Margen: ${margenCheck.mensaje || ""}
 
 ${textoDuplicados}
 
 --- Sumandos cargados ---
-${lines.join("\n")}
+${linesRaw.join("\n")}
 
 --- Soluciones encontradas ---
 ${logs.replace(/\./g, ",")}
@@ -222,6 +369,91 @@ Autor: Vincenzo Natale — vnatale52@gmail.com
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       URL.revokeObjectURL(url);
     });
+
+    // Botón colapsable de casos de uso
+    document.querySelector('.collapsible').addEventListener('click', function() {
+      this.classList.toggle('active');
+      const content = this.nextElementSibling;
+      content.classList.toggle('show');
+    });
+
+    // Función para descargar el archivo de ejemplo
+    function descargarEjemplo() {
+      const contenido = `1250,50
+3400,00
+890,75
+2100,00
+5600,30
+1500,00
+4200,90
+750,25
+3300,00
+1800,45
+2900,00
+1100,80
+6500,00
+2300,50
+1950,00
+3800,00
+1400,60
+2700,00
+4100,00
+1600,25`;
+      const blob = new Blob([contenido], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "sumandos_ejemplo.txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Función para descargar las instrucciones
+    function descargarInstrucciones() {
+      const contenido = `📋 ARCHIVO DE EJEMPLO - CONCILIACIÓN CONTABLE
+=====================================================
+
+Este archivo contiene 20 facturas pendientes de cobro.
+
+🎯 CASO PRÁCTICO:
+Recibiste una transferencia bancaria de $15.242,20 y necesitas 
+identificar qué facturas específicas fueron pagadas por el cliente.
+
+📊 VALORES A USAR:
+- Archivo: sumandos_ejemplo.txt (20 facturas)
+- Objetivo: 15242,20
+- Margen: 0,01
+
+💡 RESULTADO ESPERADO:
+El sistema encontrará todas las combinaciones de facturas que 
+suman exactamente $15.242,20 (o muy cercano según el margen).
+
+✅ FORMATO ARGENTINO:
+- Use coma (,) como separador decimal
+- NO use punto (.) como separador de miles
+- Ejemplo correcto: 15242,20
+- Ejemplo incorrecto: 15.242,20 o 15242.20
+
+🔍 INSTRUCCIONES:
+1. Descargue el archivo sumandos_ejemplo.txt
+2. Cárguelo en la aplicación
+3. Ingrese objetivo: 15242,20
+4. Ingrese margen: 0,01
+5. Presione "Calcular combinaciones"
+
+El sistema le mostrará qué facturas específicas suman ese total.`;
+      const blob = new Blob([contenido], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ejemplo_instrucciones.txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
   </script>
 </body>
 </html>
