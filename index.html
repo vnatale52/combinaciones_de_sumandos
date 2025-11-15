@@ -151,6 +151,66 @@
       font-size: 0.9em;
       color: #555;
     }
+
+    /* Estilos para la sección de descarga C# */
+    .csharp-download-section {
+      background: #e8f4fd;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+      border: 2px solid #0078d7;
+    }
+
+    .csharp-download-section h3 {
+      color: #0078d7;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .file-list {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
+
+    .file-link {
+      background: #0078d7;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .file-link:hover {
+      background: #005fa3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .file-link.csproj {
+      background: #28a745;
+    }
+
+    .file-link.csproj:hover {
+      background: #218838;
+    }
+
+    .instructions-box {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      text-align: left;
+      border-left: 4px solid #0078d7;
+    }
     
     /* Media queries para responsividad */
     @media (max-width: 768px) {
@@ -184,6 +244,17 @@
       .stats-grid {
         grid-template-columns: 1fr;
       }
+
+      .file-list {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .file-link {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
     }
     
     @media (max-width: 480px) {
@@ -203,8 +274,8 @@
 </head>
 <body>
 <nav class="navbar">
-  <a href="combinacion_de_sumandos.py" download="combinacion_de_sumandos.py">⬇️ Descargar código en Python</a>
-  <a href="Program.cs" download="Program.cs">⬇️ Descargar código en C Sharp</a>
+  <a href="combinacion_de_sumandos.py" download="combinacion_de_sumandos.py">⬇️ Código Python</a>
+  <a href="#csharp-download">🚀 Proyecto C#</a>
   <a href="README.md" download="README.md">📘 Descargar README</a>
   <a href="README.md" target="_blank">👁️ Ver README</a>
 </nav>
@@ -220,6 +291,35 @@
     <div class="responsive-warning">
       ⚠️ <strong>Nota:</strong> Esta página puede experimentar problemas de responsividad en dispositivos móviles. 
       Para mejor experiencia, use en computadora de escritorio o tablet.
+    </div>
+
+    <!-- Sección de descarga C# - Opción 3 -->
+    <div id="csharp-download" class="csharp-download-section">
+      <h3>🚀 Descargar Proyecto C# (Versión Rápida)</h3>
+      <p><strong>Necesitas ambos archivos para ejecutar la aplicación en tu PC:</strong></p>
+      
+      <div class="file-list">
+        <a href="Program.cs" download="Program.cs" class="file-link">
+          📄 Program.cs
+        </a>
+        <a href="CombinatoriaSumandos.csproj" download="CombinatoriaSumandos.csproj" class="file-link csproj">
+          ⚙️ CombinatoriaSumandos.csproj
+        </a>
+      </div>
+      
+      <div class="instructions-box">
+        <p style="margin: 0 0 10px 0;"><strong>📋 Instrucciones rápidas:</strong></p>
+        <ol style="margin: 0; padding-left: 20px;">
+          <li>Descarga ambos archivos y guárdalos en la misma carpeta</li>
+          <li>Abre una terminal/consola en esa carpeta</li>
+          <li>Ejecuta: <code>dotnet run</code></li>
+          <li>Sigue las instrucciones en pantalla</li>
+        </ol>
+      </div>
+      
+      <p style="margin-top: 15px; font-size: 0.9em; color: #555;">
+        <strong>💡 Nota:</strong> Esta versión es 5-10 veces más rápida que la versión web
+      </p>
     </div>
 
     <button class="collapsible">🎯 Casos de Uso Prácticos - ¿Para qué sirve esta aplicación?</button>
@@ -317,7 +417,6 @@
       <div class="example-buttons">
         <button onclick="descargarEjemplo()">📄 Descargar sumandos_ejemplo.txt</button>
         <button onclick="descargarInstrucciones()">📋 Descargar instrucciones de uso</button>
-        <button onclick="window.open('Program.cs', '_blank')" class="btn-secondary">⬇️ Descargar código C Sharp completo</button>
       </div>
       <p style="margin-top:10px;font-size:0.9em;color:#555;">
         <strong>Caso práctico incluido:</strong> 20 facturas pendientes de cobro. Objetivo: encontrar cuáles suman $15.242,20
