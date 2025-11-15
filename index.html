@@ -203,8 +203,8 @@
 </head>
 <body>
 <nav class="navbar">
-  <a href="combinacion_de_sumandos.py" download="combinacion_de_sumandos.py">⬇️ Descargar código Python</a>
-  <a href="CombinatoriaSumandos.cs" download="program.cs">⬇️ Descargar código C#</a>
+  <a href="combinacion_de_sumandos.py" download="combinacion_de_sumandos.py">⬇️ Descargar código en Python</a>
+  <a href="Program.cs" download="Program.cs">⬇️ Descargar código en C Sharp</a>
   <a href="README.md" download="README.md">📘 Descargar README</a>
   <a href="README.md" target="_blank">👁️ Ver README</a>
 </nav>
@@ -317,7 +317,7 @@
       <div class="example-buttons">
         <button onclick="descargarEjemplo()">📄 Descargar sumandos_ejemplo.txt</button>
         <button onclick="descargarInstrucciones()">📋 Descargar instrucciones de uso</button>
-        <button onclick="window.open('https://github.com/vnatale52/combinaciones_de_sumandos/main/CombinatoriaSumandos.cs', '_blank')" class="btn-secondary">⬇️ Descargar código C# completo</button>
+        <button onclick="window.open('Program.cs', '_blank')" class="btn-secondary">⬇️ Descargar código C Sharp completo</button>
       </div>
       <p style="margin-top:10px;font-size:0.9em;color:#555;">
         <strong>Caso práctico incluido:</strong> 20 facturas pendientes de cobro. Objetivo: encontrar cuáles suman $15.242,20
@@ -778,66 +778,6 @@ El sistema le mostrará qué facturas específicas suman ese total.`;
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
-
-    // Función para descargar código C# COMPLETO
-    function descargarCodigoCSharp() {
-      const codigoCSharp = `using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Diagnostics;
-
-namespace CombinatoriaSumandos
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            
-            var app = new CombinatoriaApp();
-            app.Run().Wait();
-        }
-    }
-
-    public class CombinatoriaApp
-    {
-        private readonly CultureInfo argentineCulture = new CultureInfo("es-AR");
-        
-        public async Task Run()
-        {
-            Console.WriteLine("=".PadRight(95, '='));
-            Console.WriteLine("        🔢 COMBINATORIA DE SUMANDOS CON ALGORITMO OPTIMIZADO (Argentina) ");
-            Console.WriteLine("=".PadRight(95, '='));
-            Console.WriteLine("⚠️  IMPORTANTE: Use formato argentino:\\n" +
-                            "   - Coma (,) como separador decimal: 1234,56\\n" +
-                            "   - SIN punto como separador de miles: escriba 12345 en lugar de 12.345\\n");
-
-            // [Código C# completo...]
-            // Por brevedad se muestra solo la estructura
-            Console.WriteLine("✅ Código C# completo - Compila y ejecuta para usar la aplicación");
-        }
-    }
-}`;
-      
-      const blob = new Blob([codigoCSharp], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "CombinatoriaSumandos.cs";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    // Asignar eventos a los enlaces de navegación
-    document.getElementById('downloadPython').addEventListener('click', descargarCodigoPython);
-    document.getElementById('downloadCSharp').addEventListener('click', descargarCodigoCSharp);
-    document.getElementById('downloadReadme').addEventListener('click', descargarReadme);
-    document.getElementById('viewReadme').addEventListener('click', verReadme);
 
     // Detectar si la página es responsiva
     function checkResponsiveness() {
